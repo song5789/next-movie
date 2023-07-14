@@ -39,7 +39,7 @@ export default function Home({ boxOfficeResult }) {
             align-items: center;
             background: #21252e;
             color: #fff;
-            padding: 3rem;
+            padding: 4.3rem;
           }
           .daily-item {
             width: 700px;

@@ -12,8 +12,12 @@ const nextConfig = {
         destination: `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${API_KEY}&targetDt=:date&itemPerPage=5`,
       },
       {
-        source: "/get/tmdbNowPlaying",
-        destination: `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_KEY}&language=ko-US`,
+        source: "/get/tmdbNowPlaying/:page",
+        destination: `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_KEY}&language=ko-US&page=:page`,
+      },
+      {
+        source: "/get/tmdb/movies/:id",
+        destination: `https://api.themoviedb.org/3/movie/:id?api_key=${TMDB_KEY}&language=ko-US`,
       },
     ];
   },
