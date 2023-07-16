@@ -9,7 +9,7 @@ export default function NavBar() {
       <Image src={"/next.svg"} width={100} height={100} alt="logo" style={{ marginBottom: "0.5rem" }} />
       <div className="link">
         <Link legacyBehavior href={"/"}>
-          <a className={router.pathname === "/" ? "active" : ""}>Home</a>
+          <a className={router.pathname === "/" ? "active" : ""}>Movies</a>
         </Link>
         <Link legacyBehavior href={"/ko-movie-rnk"}>
           <a className={router.pathname === "/ko-movie-rnk" ? "active" : ""}>BoxOffice(KOR)</a>
@@ -27,7 +27,11 @@ export default function NavBar() {
             display: flex;
             align-items: center;
             padding: 1rem;
+            box-sizing: border-box;
             position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 999;
           }
           .container a {
             text-decoration: none;

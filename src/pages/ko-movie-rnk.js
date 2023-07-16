@@ -5,7 +5,7 @@ import SEO from "../../components/SEO";
 const dateQuery = useDateStr();
 
 const getDailyRanking = async () => {
-  const { boxOfficeResult } = await (await fetch(`http://192.168.0.54:3000/get/todayRk/${dateQuery}`)).json();
+  const { boxOfficeResult } = await (await fetch(`http://localhost:3000/get/todayRk/${dateQuery}`)).json();
   return boxOfficeResult;
 };
 
@@ -15,7 +15,7 @@ export default function Home({ boxOfficeResult }) {
     <div>
       <SEO title={"국내 상영 랭킹"}></SEO>
       <div className="daily">
-        <h1>극장 일일 박스오피스 Top 5</h1>
+        <h1>극장 일일 박스오피스 Top 10</h1>
         {lists.map((v) => (
           <div key={v.movieCd}>
             <div className="daily-item">
@@ -27,7 +27,6 @@ export default function Home({ boxOfficeResult }) {
             </div>
           </div>
         ))}
-        <div>API 출처: 영화진흥위원회</div>
       </div>
       <style jsx>
         {`
@@ -39,7 +38,7 @@ export default function Home({ boxOfficeResult }) {
             align-items: center;
             background: #21252e;
             color: #fff;
-            padding: 4.3rem;
+            padding: 1rem;
           }
           .daily-item {
             width: 700px;
@@ -50,7 +49,7 @@ export default function Home({ boxOfficeResult }) {
             align-items: center;
             background: #fff;
             color: black;
-            margin-bottom: 2rem;
+            margin-bottom: 0.5rem;
             font-size: 18px;
             border-radius: 8px;
             transition: 0.2s;

@@ -30,7 +30,7 @@ const Pagination = ({ elem, onClick, pageNum }) => {
   };
 
   return (
-    <Slider {...settings} style={{ width: "100%" }}>
+    <Slider {...settings}>
       {elem.map((e) => (
         <div key={e} className={pageNum === e + 1 ? "countpage current" : "countpage"}>
           {e + 1}

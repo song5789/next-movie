@@ -6,16 +6,29 @@ const getMovieInfo = async (id) => {
   const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/${id}`)).json();
   return result;
 };
+const getMovieCredits = async (id) => {
+  const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/credits/${id}`)).json();
+  return result;
+};
 
-export default function MovieDetail({ params, movie }) {
+export default function MovieDetail({ params, movie, credits }) {
   const [isClient, setIsClient] = useState(false);
+  const [mainCrew, setMainCrew] = useState({
+    producer: null,
+    director: null,
+  });
   const router = useRouter();
-
   useEffect(() => {
     setIsClient(true);
+    setMainCrew((state) => ({
+      ...state,
+      director: credits.crew.filter((v) => v.job === "Director"),
+      producer: credits.crew.filter((v) => v.job === "Producer"),
+    }));
   }, []);
 
   const [title, id] = params;
+  const { producer, director } = mainCrew;
   if (isClient) {
     return (
       <>
@@ -45,6 +58,64 @@ export default function MovieDetail({ params, movie }) {
                           <h3>{movie.release_date}</h3>
                         </td>
                       </tr>
+                      <tr>
+                        <td className="t-h">
+                          <h3>국가</h3>
+                        </td>
+                        <td className="t-d">
+                          <h3>{movie.original_language}</h3>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="t-h">
+                          <h3>장르</h3>
+                        </td>
+                        <td className="t-d">
+                          <h3>
+                            {movie.genres.map((ge) => (
+                              <span key={ge.id}>{ge.name}&nbsp;&nbsp;&nbsp;</span>
+                            ))}
+                          </h3>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="t-h">
+                          <h3>평점</h3>
+                        </td>
+                        <td className="t-d">
+                          <h3>
+                            <b style={{ color: "tomato" }}>★</b>&nbsp;&nbsp;
+                            {Math.round(movie.vote_average * 10) / 10}&nbsp;&nbsp;
+                            <i style={{ color: "rgba(0,0,0,0.8)", fontSize: 12 }}>({movie.vote_count} 명 참여)</i>
+                          </h3>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="t-h">
+                          <h3>러닝타임</h3>
+                        </td>
+                        <td className="t-d">
+                          <h3>{movie.runtime} 분</h3>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="t-h">
+                          <h3>감독</h3>
+                        </td>
+                        <td className="t-d">
+                          <h3>{director[0].name || ""}</h3>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="t-h">
+                          <h3>제작</h3>
+                        </td>
+                        <td className="t-d">
+                          {producer.map((p) => (
+                            <b key={p.id}>{p.name},&nbsp;&nbsp;</b>
+                          ))}{" "}
+                        </td>
+                      </tr>
                     </table>
                   </div>
                 </div>
@@ -58,7 +129,7 @@ export default function MovieDetail({ params, movie }) {
               width: 100%;
               background: #21252e;
               color: #fff;
-              padding: 2.5rem;
+              padding: 0.5rem 0 0 0;
             }
             .movie-i-con {
               min-width: 800px;
@@ -93,7 +164,7 @@ export default function MovieDetail({ params, movie }) {
               width: 30%;
               position: relative;
               top: -110px;
-              left: 40px;
+              left: 25px;
             }
             .poster img {
               max-width: 100%;
@@ -139,10 +210,12 @@ export default function MovieDetail({ params, movie }) {
 
 export async function getServerSideProps({ params: { params } }) {
   const movie = await getMovieInfo(params[1]);
+  const credits = await getMovieCredits(params[1]);
   return {
     props: {
       params,
       movie,
+      credits,
     },
   };
 }

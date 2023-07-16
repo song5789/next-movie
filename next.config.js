@@ -9,7 +9,7 @@ const nextConfig = {
     return [
       {
         source: "/get/todayRk/:date",
-        destination: `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${API_KEY}&targetDt=:date&itemPerPage=5`,
+        destination: `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${API_KEY}&targetDt=:date&itemPerPage=10`,
       },
       {
         source: "/get/tmdbNowPlaying/:page",
@@ -18,6 +18,10 @@ const nextConfig = {
       {
         source: "/get/tmdb/movies/:id",
         destination: `https://api.themoviedb.org/3/movie/:id?api_key=${TMDB_KEY}&language=ko-US`,
+      },
+      {
+        source: "/get/tmdb/movies/credits/:id",
+        destination: `https://api.themoviedb.org/3/movie/:id/credits?api_key=${TMDB_KEY}&language=ko-US`,
       },
     ];
   },

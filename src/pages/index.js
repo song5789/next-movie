@@ -44,20 +44,24 @@ export default function Home() {
   };
   return (
     <div>
-      <SEO title="Home" />
+      <SEO title="Movies" />
       <div className="container">
         <div>
           <h1>상영중인 영화</h1>
         </div>
-        <div className="pagination">
-          <Pagination elem={setPages} onClick={onClick} pageNum={pageNum} />
+        <div className="page-con">
+          <div className="pagination">
+            <Pagination elem={setPages} onClick={onClick} pageNum={pageNum} />
+          </div>
         </div>
         <div className="movie-cards">
           {lists.map((s) => (
             <div key={s.id} onClick={() => onPush(s.id, s.title)}>
-              <div>
-                <img src={`https://image.tmdb.org/t/p/original/${s.poster_path}`} />
-              </div>
+              <Link href={`/movies/${s.title}/${s.id}`}>
+                <div>
+                  <img src={`https://image.tmdb.org/t/p/original/${s.poster_path}`} />
+                </div>
+              </Link>
               <div>
                 <h2>{s.title}</h2>
               </div>
@@ -87,9 +91,20 @@ export default function Home() {
             border-radius: 18px;
             box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
           }
+          .page-con {
+            width: 90vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #21252e;
+            position: sticky;
+            top: 8.6%;
+            z-index: 997;
+            padding: 1rem 0 1rem 0;
+            box-sizing: border-box;
+          }
           .pagination {
             width: 600px;
-            margin-bottom: 1rem;
           }
           .movie-cards {
             width: 95%;
@@ -119,6 +134,7 @@ export default function Home() {
           .movie-cards > div:hover {
             transform: scale(1.08);
             box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8);
+            z-index: 998;
           }
           .movie-cards h2 {
             text-align: center;

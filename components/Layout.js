@@ -1,5 +1,6 @@
 import NavBar from "./Nav";
 import ToTop from "./ToTop";
+import Footer from "./Footer";
 
 export default function Layout({ children }) {
   return (
@@ -7,6 +8,7 @@ export default function Layout({ children }) {
       <NavBar />
       <div>{children}</div>
       <ToTop />
+      <Footer />
     </>
   );
 }
