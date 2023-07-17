@@ -11,6 +11,8 @@ const getDailyRanking = async () => {
 
 export default function Home({ boxOfficeResult }) {
   const { boxofficeType: type, dailyBoxOfficeList: lists } = boxOfficeResult;
+  const today = new Date();
+  const yesterDay = new Date(today.getTime() - 1000 * 3600 * 24);
   return (
     <div>
       <SEO title={"국내 상영 랭킹"}></SEO>
@@ -27,6 +29,7 @@ export default function Home({ boxOfficeResult }) {
             </div>
           </div>
         ))}
+        <div>{yesterDay.toLocaleDateString()} 기준</div>
       </div>
       <style jsx>
         {`

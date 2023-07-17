@@ -1,6 +1,7 @@
 import Link from "next/link";
+import React from "react";
 
-export default function Footer() {
+function Footer() {
   const linkSt = {
     color: "inherit",
     textDecoration: "none",
@@ -54,3 +55,5 @@ export default function Footer() {
     </>
   );
 }
+
+export default React.memo(Footer);

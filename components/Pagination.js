@@ -21,11 +21,6 @@ const Pagination = ({ elem, onClick, pageNum }) => {
       } else {
         onClick(next);
       }
-
-      setState((state) => ({
-        ...state,
-        activeSlide: next,
-      }));
     },
   };
 
@@ -55,4 +50,4 @@ const Pagination = ({ elem, onClick, pageNum }) => {
   );
 };
 
-export default Pagination;
+export default React.memo(Pagination);

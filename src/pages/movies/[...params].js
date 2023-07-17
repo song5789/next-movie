@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import SEO from "../../../components/SEO";
 import { useEffect, useState } from "react";
+import CastSwiper from "../../../components/CastSwiper";
+import SimilarSwiper from "../../../components/SimilarSwiper";
 
 const getMovieInfo = async (id) => {
   const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/${id}`)).json();
@@ -10,8 +12,17 @@ const getMovieCredits = async (id) => {
   const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/credits/${id}`)).json();
   return result;
 };
+async function getSimilarMovies(id) {
+  const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/similar/${id}`)).json();
+  return result;
+}
 
-export default function MovieDetail({ params, movie, credits }) {
+async function getRecommendations(id) {
+  const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/recommendations/${id}`)).json();
+  return result;
+}
+
+export default function MovieDetail({ params, movie, credits, similar, recommendations }) {
   const [isClient, setIsClient] = useState(false);
   const [mainCrew, setMainCrew] = useState({
     producer: null,
@@ -39,7 +50,7 @@ export default function MovieDetail({ params, movie, credits }) {
               <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} />
               <div className="detail-info">
                 <div className="poster">
-                  <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
+                  <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
                 </div>
                 <div className="basic-info">
                   <div className="basic-info-title">
@@ -86,7 +97,7 @@ export default function MovieDetail({ params, movie, credits }) {
                           <h3>
                             <b style={{ color: "tomato" }}>★</b>&nbsp;&nbsp;
                             {Math.round(movie.vote_average * 10) / 10}&nbsp;&nbsp;
-                            <i style={{ color: "rgba(0,0,0,0.8)", fontSize: 12 }}>({movie.vote_count} 명 참여)</i>
+                            <i style={{ color: "rgba(0,0,0,0.8)", fontSize: 12 }}>({Number(movie.vote_count).toLocaleString()} 명 참여)</i>
                           </h3>
                         </td>
                       </tr>
@@ -121,6 +132,22 @@ export default function MovieDetail({ params, movie, credits }) {
                 </div>
               </div>
             </div>
+            <div className="overview">
+              <h2>소개</h2>
+              <p>{movie.overview || "개요 없음."}</p>
+            </div>
+            <div className="casts">
+              <h1>출연</h1>
+              <CastSwiper cast={credits.cast} />
+            </div>
+            <div className="recommendations">
+              <h1>추천 영화</h1>
+              <SimilarSwiper simliar={recommendations.results} />
+            </div>
+            <div className="similar">
+              <h1>유사한 영화</h1>
+              <SimilarSwiper simliar={similar.results} />
+            </div>
           </div>
         </div>
         <style jsx>
@@ -139,6 +166,7 @@ export default function MovieDetail({ params, movie, credits }) {
             .backdrop {
               width: 100%;
               position: relative;
+              margin-bottom: -270px;
             }
             .backdrop > img {
               max-width: 100%;
@@ -201,6 +229,26 @@ export default function MovieDetail({ params, movie, credits }) {
               padding: 1rem;
               height: 10px;
             }
+            .overview {
+              margin-bottom: 1.7rem;
+              padding: 1.5rem;
+              border-radius: 15px;
+              background: #fff;
+              color: #000;
+              font-size: 20px;
+            }
+            .casts {
+              width: 100%;
+              background: #fff;
+              border-radius: 15px;
+              padding: 1.5rem;
+              box-sizing: border-box;
+              color: #000;
+              margin-bottom: 1.7rem;
+            }
+            .similar {
+              margin-bottom: 1.7rem;
+            }
           `}
         </style>
       </>
@@ -211,11 +259,15 @@ export default function MovieDetail({ params, movie, credits }) {
 export async function getServerSideProps({ params: { params } }) {
   const movie = await getMovieInfo(params[1]);
   const credits = await getMovieCredits(params[1]);
+  const similar = await getSimilarMovies(params[1]);
+  const recommendations = await getRecommendations(params[1]);
   return {
     props: {
       params,
       movie,
       credits,
+      similar,
+      recommendations,
     },
   };
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SEO from "../../components/SEO";
 import useSetPage from "../../hook/useSetPage";
 import Pagination from "../../components/Pagination";
@@ -59,7 +59,7 @@ export default function Home() {
             <div key={s.id} onClick={() => onPush(s.id, s.title)}>
               <Link href={`/movies/${s.title}/${s.id}`}>
                 <div>
-                  <img src={`https://image.tmdb.org/t/p/original/${s.poster_path}`} />
+                  <img src={`https://image.tmdb.org/t/p/w500/${s.poster_path}`} />
                 </div>
               </Link>
               <div>
@@ -98,8 +98,8 @@ export default function Home() {
             align-items: center;
             background: #21252e;
             position: sticky;
-            top: 8.6%;
-            z-index: 997;
+            top: 5rem;
+            z-index: 998;
             padding: 1rem 0 1rem 0;
             box-sizing: border-box;
           }
@@ -132,9 +132,9 @@ export default function Home() {
             border-top-left-radius: 15px;
           }
           .movie-cards > div:hover {
-            transform: scale(1.08);
+            transform: scale(1.02);
             box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8);
-            z-index: 998;
+            z-index: 997;
           }
           .movie-cards h2 {
             text-align: center;

@@ -1,4 +1,6 @@
-export default function Top() {
+import React from "react";
+
+function Top() {
   const onClick = () => {
     window.scrollTo(0, 0);
   };
@@ -44,3 +46,5 @@ export default function Top() {
     </>
   );
 }
+
+export default React.memo(Top);

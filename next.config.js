@@ -23,6 +23,18 @@ const nextConfig = {
         source: "/get/tmdb/movies/credits/:id",
         destination: `https://api.themoviedb.org/3/movie/:id/credits?api_key=${TMDB_KEY}&language=ko-US`,
       },
+      {
+        source: "/get/tmdb/movies/similar/:id",
+        destination: `https://api.themoviedb.org/3/movie/:id/similar?api_key=${TMDB_KEY}&language=ko-US`,
+      },
+      {
+        source: "/get/tmdb/movies/recommendations/:id",
+        destination: `https://api.themoviedb.org/3/movie/:id/recommendations?api_key=${TMDB_KEY}&language=ko-US`,
+      },
+      {
+        source: "/get/tmdb/actors/:id",
+        destination: `https://api.themoviedb.org/3/person/:id?api_key=${TMDB_KEY}&append_to_response=movie_credits,tv_credits`,
+      },
     ];
   },
 };
