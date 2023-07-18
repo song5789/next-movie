@@ -133,13 +133,15 @@ export default function TVDetail({ params, tv }) {
             <h1>주요 출연진</h1>
             <CastSwiper cast={tv.credits.cast} />
           </div>
-          <div className="cast margin-top-basic">
+          <div className="cast margin-top-basic ">
             <h1>방송사</h1>
-            {tv.networks.map((n) => (
-              <div className="networks">
-                <img src={`https://image.tmdb.org/t/p/w500/${n.logo_path}`} />
-              </div>
-            ))}
+            <div className="flex">
+              {tv.networks.map((n) => (
+                <div className="networks ">
+                  <img src={`https://image.tmdb.org/t/p/w500/${n.logo_path}`} />
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="color-w">
@@ -240,10 +242,16 @@ export default function TVDetail({ params, tv }) {
             }
             .networks {
               max-width: 150px;
-              margin-top: 3rem;
+              margin-right: 3rem;
             }
             .networks > img {
               max-width: 100%;
+            }
+            .flex {
+              width: 100%;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
             }
           `}
         </style>
