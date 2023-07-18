@@ -126,8 +126,8 @@ export default function TVDetail({ params, tv }) {
             </div>
           </div>
           <div className="cast">
-            <h1>개요</h1>
-            <h3>{tv.overview || "소개 없음"}</h3>
+            <h1>소개</h1>
+            <h3>{tv.overview || "개요 없음"}</h3>
           </div>
           <div className="cast margin-top-basic">
             <h1>주요 출연진</h1>
