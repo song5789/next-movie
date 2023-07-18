@@ -12,6 +12,9 @@ function NavBar() {
         <Link legacyBehavior href={"/"}>
           <a className={router.pathname === "/" ? "active" : ""}>Movies</a>
         </Link>
+        <Link legacyBehavior href={"/tv_list"}>
+          <a className={router.pathname === "/tv_list" ? "active" : ""}>TV Show</a>
+        </Link>
         <Link legacyBehavior href={"/ko-movie-rnk"}>
           <a className={router.pathname === "/ko-movie-rnk" ? "active" : ""}>BoxOffice(KOR)</a>
         </Link>

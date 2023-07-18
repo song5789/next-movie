@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { styled } from "styled-components";
 import { useRouter } from "next/router";
-import { rule } from "postcss";
+import Link from "next/link";
 
 const StyledSlider = styled(Slider)`
   .slick-prev {
@@ -17,8 +17,11 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-export default function CastSwiper({ cast }) {
+export default function TVSwiper({ episode, seriesNum, seriesName }) {
   const router = useRouter();
+  const moveToInfo = (s_id, title, seriesNum, seriesName) => {
+    router.push(`/seasons/${seriesName}/${seriesNum}/${title}/${s_id}`);
+  };
   const settings = {
     dots: false,
     infinite: false,
@@ -26,27 +29,23 @@ export default function CastSwiper({ cast }) {
     speed: 650,
     slidesToShow: 1,
     slidesToScroll: 5,
-    centerPadding: "0px;",
   };
 
-  const moveToActor = (id, name) => {
-    router.push(`/actors/${name}/${id}`);
-  };
   return (
     <StyledSlider {...settings}>
-      {cast.map((c) => (
-        <div key={c.id} className="cast-card" onClick={() => moveToActor(c.id, c.original_name)}>
+      {episode.map((s) => (
+        <div key={s.id} className="cast-card" onClick={() => moveToInfo(s.season_number, s.name, seriesNum, seriesName)}>
           <div className="card-img">
-            <img src={c.profile_path ? `https://image.tmdb.org/t/p/w500/${c.profile_path}` : `https://placehold.co/500x750?text=none`} />
+            <img src={s.poster_path ? `https://image.tmdb.org/t/p/w500/${s.poster_path}` : `https://placehold.co/500x750?text=none`} />
           </div>
           <div className="description">
             <span>
-              <b>{c.original_name}</b>
+              <b>{`${seriesName} : ${s.name}`}</b>
             </span>
             <span>
-              <i>{c.character}</i>
+              <b style={{ color: "tomato" }}>★</b>&nbsp;&nbsp;
+              <span>{Math.round(s.vote_average * 10) / 10}</span>
             </span>
-            <span>{c.known_for_department}</span>
           </div>
         </div>
       ))}
@@ -54,7 +53,7 @@ export default function CastSwiper({ cast }) {
         {`
           .cast-card {
             max-width: 180px !important;
-            margin-right: 0.25rem;
+            margin-right: 0.5rem;
             border-radius: 5px;
             box-sizing: border-box;
             overflow: hidden;
@@ -76,11 +75,7 @@ export default function CastSwiper({ cast }) {
           .description > span:nth-child(2) {
             width: 100%;
             font-size: 0.75rem;
-            margin: 0.25rem 0 0.25rem 0;
-          }
-          .description > span:last-child {
-            font-size: 0.8rem;
-            opacity: 0.8;
+            margin: 0.25rem 0 0 0;
           }
         `}
       </style>

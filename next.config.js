@@ -20,6 +20,10 @@ const nextConfig = {
         destination: `https://api.themoviedb.org/3/movie/:id?api_key=${TMDB_KEY}&language=ko-US`,
       },
       {
+        source: "/get/tmdb/pop_tv_list/:page",
+        destination: `https://api.themoviedb.org/3/tv/popular?api_key=${TMDB_KEY}&language=ko-US&page=:page`,
+      },
+      {
         source: "/get/tmdb/movies/credits/:id",
         destination: `https://api.themoviedb.org/3/movie/:id/credits?api_key=${TMDB_KEY}&language=ko-US`,
       },
@@ -34,6 +38,18 @@ const nextConfig = {
       {
         source: "/get/tmdb/actors/:id",
         destination: `https://api.themoviedb.org/3/person/:id?api_key=${TMDB_KEY}&append_to_response=movie_credits,tv_credits`,
+      },
+      {
+        source: "/get/tmdb/tv_show/:id",
+        destination: `https://api.themoviedb.org/3/tv/:id?api_key=${TMDB_KEY}&language=ko-US&append_to_response=recommendations,credits`,
+      },
+      {
+        source: "/get/tmdb/tv_show/:id/seasons/:sid",
+        destination: `https://api.themoviedb.org/3/tv/:id/season/:sid?api_key=${TMDB_KEY}&language=ko-US`,
+      },
+      {
+        source: "/get/tmdb/tv_show/:id/seasons/:sid/episodes/:eid",
+        destination: `https://api.themoviedb.org/3/tv/:id/season/:sid/episode/:eid?api_key=${TMDB_KEY}&language=ko-US`,
       },
     ];
   },

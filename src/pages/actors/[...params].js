@@ -10,10 +10,8 @@ const getAtorsInfo = async (id) => {
 
 export default function ActorPage({ params, actors, movie_credits, tv_credits }) {
   const [isClient, setIsClient] = useState(false);
-  const [splitText, setSplitText] = useState("");
   useEffect(() => {
     setIsClient(true);
-    setSplitText(actors.biography.replace("/\n/g", "<br/>"));
   }, []);
   const [name, id] = params;
   if (isClient) {
@@ -99,7 +97,7 @@ export default function ActorPage({ params, actors, movie_credits, tv_credits })
           </div>
           <div className="biography">
             <h2>약력</h2>
-            <p>{splitText}</p>
+            <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-all", overflow: "auto" }}>{actors.biography}</pre>
           </div>
         </div>
         <div className="credits">
@@ -168,6 +166,9 @@ export default function ActorPage({ params, actors, movie_credits, tv_credits })
               padding: 0rem;
               box-sizing: border-box;
               color: #fff;
+            }
+            pre {
+              font-size: 15px;
             }
           `}
         </style>

@@ -17,7 +17,7 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-export default function CastSwiper({ simliar, isTV }) {
+export default function ElemSwiper({ simliar, isTV }) {
   const router = useRouter();
   const moveToInfo = (id, title, isTV) => {
     if (!isTV) router.push(`/movies/${title}/${id}`);
@@ -28,17 +28,14 @@ export default function CastSwiper({ simliar, isTV }) {
     infinite: false,
     variableWidth: true,
     speed: 650,
-    slidesToShow: 5,
+    slidesToShow: 1,
     slidesToScroll: 5,
   };
-  const linkSt = {
-    textDecoration: "none",
-    color: "inherit",
-  };
+
   return (
     <StyledSlider {...settings}>
       {simliar.map((s) => (
-        <div key={s.id} className="cast-card" onClick={() => moveToInfo(s.id, s.title, isTV)}>
+        <div key={s.id} className="cast-card" onClick={() => moveToInfo(s.id, s.title || s.name, isTV)}>
           <div className="card-img">
             <img src={s.poster_path ? `https://image.tmdb.org/t/p/w500/${s.poster_path}` : `https://placehold.co/500x750?text=none`} />
           </div>

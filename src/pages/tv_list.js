@@ -1,16 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import SEO from "../../components/SEO";
 import useSetPage from "../../hook/useSetPage";
 import Pagination from "../../components/Pagination";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const getMovieList = async (page) => {
-  const { results, total_pages, total_results } = await (await fetch(`http://localhost:3000/get/tmdbNowPlaying/${page}`)).json();
+const getTvShowList = async (page) => {
+  const { results, total_pages, total_results } = await (await fetch(`http://localhost:3000/get/tmdb/pop_tv_list/${page}`)).json();
   return { results, total_pages, total_results };
 };
 
-export default function Home() {
+export default function TVlist() {
   const [lists, setLists] = useState([]);
   const [page, setPage] = useState({
     totalPage: null,
@@ -20,7 +20,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    getMovieList(page.pageNum).then(({ results, total_pages, total_results }) => {
+    getTvShowList(page.pageNum).then(({ results, total_pages, total_results }) => {
       setLists(results);
       setPage((state) => ({
         ...state,
@@ -30,8 +30,10 @@ export default function Home() {
     });
   }, [page.pageNum]);
 
-  const { totalPage, pageNum } = page;
-
+  let { totalPage, pageNum } = page;
+  if (totalPage >= 100) {
+    totalPage = 100;
+  }
   const setPages = useSetPage(totalPage);
   const onClick = (pageNum) => {
     setPage((state) => ({
@@ -40,14 +42,14 @@ export default function Home() {
     }));
   };
   const onPush = (id, title) => {
-    router.push(`/movies/${title}/${id}`);
+    router.push(`/tv_series/${title}/${id}`);
   };
   return (
     <div>
       <SEO title="Movies" />
       <div className="container">
         <div>
-          <h1>상영중인 영화</h1>
+          <h1>On Air</h1>
         </div>
         <div className="page-con">
           <div className="pagination">
@@ -56,14 +58,14 @@ export default function Home() {
         </div>
         <div className="movie-cards">
           {lists.map((s) => (
-            <div key={s.id} onClick={() => onPush(s.id, s.title)}>
-              <Link href={`/movies/${s.title}/${s.id}`}>
+            <div key={s.id} onClick={() => onPush(s.id, s.name)}>
+              <Link href={`/tv_series/${s.name}/${s.id}`}>
                 <div>
                   <img src={`https://image.tmdb.org/t/p/w500/${s.poster_path}`} />
                 </div>
               </Link>
               <div>
-                <h2>{s.title}</h2>
+                <h2>{s.name}</h2>
               </div>
             </div>
           ))}
