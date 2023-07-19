@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import SEO from "../../../components/SEO";
 import CastSwiper from "../../../components/CastSwiper";
+import BackdropImg from "../../../components/BackdropImg";
 
 const getEpisodeInfo = async (seriesId, seasonId, episodeId) => {
   const result = await (await fetch(`http://localhost:3000/get/tmdb/tv_show/${seriesId}/seasons/${seasonId}/episodes/${episodeId}`)).json();
@@ -15,7 +16,7 @@ export default function Episode({ prams, episode }) {
       <div className="container">
         <SEO title={`${seriesName} : ${seasonName} ${episodeId}화`} />
         <div className="backdrop">
-          <img src={episode.still_path ? `https://image.tmdb.org/t/p/original/${episode.still_path}` : `https://placehold.co/3840x2160?text=none`} />
+          <BackdropImg src={episode.still_path ? `https://image.tmdb.org/t/p/original/${episode.still_path}` : `/none_3160x2160.svg`} />
           <div className="episode-name">{episode.name}</div>
           <div className="episode-info">
             <div>
@@ -75,8 +76,9 @@ export default function Episode({ prams, episode }) {
             font-size: 3rem;
             font-weight: 700;
             position: absolute;
-            top: 20%;
+            top: 25%;
             left: 2rem;
+            z-index: 10;
           }
           .crew {
             margin-top: 2rem;

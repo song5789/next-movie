@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Img = styled(Image)`
   height: auto !important;
-  max-width: 100%;
+  max-width: 100% !important;
   border-radius: 15px;
   box-shadow: 0px -10px 15px rgba(0, 0, 0, 0.8);
 `;
