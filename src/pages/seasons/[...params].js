@@ -35,8 +35,8 @@ export default function Seasons({ params, season }) {
               </h3>
             </div>
             <div>
-              {season.episodes.map((e) => (
-                <div className="episodes-card" onClick={() => moveEpInfo(seriesName, seriesId, seasonName, seasonId, e.episode_number)}>
+              {season.episodes.map((e, index) => (
+                <div key={index} className="episodes-card" onClick={() => moveEpInfo(seriesName, seriesId, seasonName, seasonId, e.episode_number)}>
                   <div className="episodes-still">
                     <img src={e.still_path ? `https://image.tmdb.org/t/p/w500/${e.still_path}` : `https://placehold.co/500x750?text=none`} />
                   </div>

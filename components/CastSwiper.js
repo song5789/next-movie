@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { styled } from "styled-components";
 import { useRouter } from "next/router";
 import { rule } from "postcss";
+import ProfileImg from "./ProfileImg";
 
 const StyledSlider = styled(Slider)`
   .slick-prev {
@@ -37,7 +38,7 @@ export default function CastSwiper({ cast }) {
       {cast.map((c) => (
         <div key={c.id} className="cast-card" onClick={() => moveToActor(c.id, c.original_name)}>
           <div className="card-img">
-            <img src={c.profile_path ? `https://image.tmdb.org/t/p/w500/${c.profile_path}` : `https://placehold.co/500x750?text=none`} />
+            <ProfileImg src={c.profile_path !== null ? `https://image.tmdb.org/t/p/w500/${c.profile_path}` : `/none_500x750.svg`} />
           </div>
           <div className="description">
             <span>

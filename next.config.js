@@ -5,6 +5,9 @@ const TMDB_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: [`image.tmdb.org`, `placehold.co`],
+  },
   async rewrites() {
     return [
       {

@@ -1,4 +1,4 @@
-export default function GetDateQuery() {
+export default function getDateQuery() {
   const today = new Date();
   const yesterDay = new Date(today.getTime() + 1000 * 60 * 60 * 24 * -1);
 

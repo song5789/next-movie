@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SEO from "../../../components/SEO";
-import useCalcAge from "../../../hook/useCalcAge";
+import ageFunc from "../../../hook/ageFunc";
 import SimilarSwiper from "../../../components/SimilarSwiper";
 
 const getAtorsInfo = async (id) => {
@@ -35,7 +35,7 @@ export default function ActorPage({ params, actors, movie_credits, tv_credits })
                     </td>
                     <td className="t-d">
                       <h3>
-                        {actors.birthday} ({useCalcAge(actors.birthday)} 세)
+                        {actors.birthday} ({ageFunc(actors.birthday)} 세)
                       </h3>
                     </td>
                   </tr>
@@ -86,8 +86,8 @@ export default function ActorPage({ params, actors, movie_credits, tv_credits })
                       <h3>다른 명칭</h3>
                     </td>
                     <td className="t-d row">
-                      {actors.also_known_as.map((v) => (
-                        <b>{v},&nbsp;&nbsp;</b>
+                      {actors.also_known_as.map((v, index) => (
+                        <b key={index}>{v},&nbsp;&nbsp;</b>
                       ))}
                     </td>
                   </tr>

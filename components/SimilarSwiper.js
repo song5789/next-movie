@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { styled } from "styled-components";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import ProfileImg from "./ProfileImg";
 
 const StyledSlider = styled(Slider)`
   .slick-prev {
@@ -37,7 +37,7 @@ export default function ElemSwiper({ simliar, isTV }) {
       {simliar.map((s) => (
         <div key={s.id} className="cast-card" onClick={() => moveToInfo(s.id, s.title || s.name, isTV)}>
           <div className="card-img">
-            <img src={s.poster_path ? `https://image.tmdb.org/t/p/w500/${s.poster_path}` : `https://placehold.co/500x750?text=none`} />
+            <ProfileImg src={s.poster_path ? `https://image.tmdb.org/t/p/w500/${s.poster_path}` : `/none_500x750.svg`} />
           </div>
           <div className="description">
             <span>

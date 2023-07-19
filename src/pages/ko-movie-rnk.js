@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import useDateStr from "../../hook/useDateStr";
+import dateFunc from "../../hook/dateFunc";
 import SEO from "../../components/SEO";
 
-const dateQuery = useDateStr();
-
 const getDailyRanking = async () => {
+  const dateQuery = dateFunc();
   const { boxOfficeResult } = await (await fetch(`http://localhost:3000/get/todayRk/${dateQuery}`)).json();
   return boxOfficeResult;
 };

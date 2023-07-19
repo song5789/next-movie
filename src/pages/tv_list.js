@@ -4,6 +4,7 @@ import useSetPage from "../../hook/useSetPage";
 import Pagination from "../../components/Pagination";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import PosterImg from "../../components/PosterImg";
 
 const getTvShowList = async (page) => {
   const { results, total_pages, total_results } = await (await fetch(`http://localhost:3000/get/tmdb/pop_tv_list/${page}`)).json();
@@ -61,7 +62,7 @@ export default function TVlist() {
             <div key={s.id} onClick={() => onPush(s.id, s.name)}>
               <Link href={`/tv_series/${s.name}/${s.id}`}>
                 <div>
-                  <img src={`https://image.tmdb.org/t/p/w500/${s.poster_path}`} />
+                  <PosterImg src={s.poster_path ? `https://image.tmdb.org/t/p/w500/${s.poster_path}` : "/none_500x750.svg"} />
                 </div>
               </Link>
               <div>

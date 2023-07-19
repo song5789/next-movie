@@ -3,7 +3,8 @@ import SEO from "../../../components/SEO";
 import TVSwiper from "../../../components/TVSwiper";
 import CastSwiper from "../../../components/CastSwiper";
 import ElemSwiper from "../../../components/SimilarSwiper";
-import Link from "next/link";
+import BackdropImg from "../../../components/BackdropImg";
+import InfoPoster from "../../../components/InfoPoster";
 
 const getTVShowInfo = async (id) => {
   const result = await (await fetch(`http://localhost:3000/get/tmdb/tv_show/${id}`)).json();
@@ -24,10 +25,10 @@ export default function TVDetail({ params, tv }) {
         <div className="tv-i-con">
           <SEO title={title} />
           <div className="backdrop">
-            <img src={`https://image.tmdb.org/t/p/original/${tv.backdrop_path}`} />
+            <BackdropImg src={tv.backdrop_path ? `https://image.tmdb.org/t/p/original/${tv.backdrop_path}` : `/none_3160x2160.svg`} />
             <div className="detail-info">
               <div className="main-poster">
-                <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
+                <InfoPoster src={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : `/none_500x750.svg`} />
               </div>
               <div className="basic-info">
                 <div className="main-title">

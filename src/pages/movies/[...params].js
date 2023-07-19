@@ -3,6 +3,9 @@ import SEO from "../../../components/SEO";
 import { useEffect, useState } from "react";
 import CastSwiper from "../../../components/CastSwiper";
 import SimilarSwiper from "../../../components/SimilarSwiper";
+import BackdropImg from "../../../components/BackdropImg";
+import InfoPoster from "../../../components/InfoPoster";
+import Image from "next/image";
 
 const getMovieInfo = async (id) => {
   const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/${id}`)).json();
@@ -47,10 +50,10 @@ export default function MovieDetail({ params, movie, credits, similar, recommend
           <SEO title={title} />
           <div className="movie-i-con">
             <div className="backdrop">
-              <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} />
+              <BackdropImg src={movie.backdrop_path ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}` : `/none_3160x2160.svg`} />
               <div className="detail-info">
                 <div className="poster">
-                  <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+                  <InfoPoster src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : `/none_500x750.svg`} />
                 </div>
                 <div className="basic-info">
                   <div className="basic-info-title">

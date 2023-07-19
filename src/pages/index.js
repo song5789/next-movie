@@ -4,6 +4,7 @@ import useSetPage from "../../hook/useSetPage";
 import Pagination from "../../components/Pagination";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import PosterImg from "../../components/PosterImg";
 
 const getMovieList = async (page) => {
   const { results, total_pages, total_results } = await (await fetch(`http://localhost:3000/get/tmdbNowPlaying/${page}`)).json();
@@ -59,7 +60,7 @@ export default function Home() {
             <div key={s.id} onClick={() => onPush(s.id, s.title)}>
               <Link href={`/movies/${s.title}/${s.id}`}>
                 <div>
-                  <img src={`https://image.tmdb.org/t/p/w500/${s.poster_path}`} />
+                  <PosterImg src={s.poster_path ? `https://image.tmdb.org/t/p/w500/${s.poster_path}` : "/none_500x750.svg"} />
                 </div>
               </Link>
               <div>
@@ -126,7 +127,7 @@ export default function Home() {
             flex-direction: column;
             justify-content: space-between;
           }
-          .movie-cards > div img {
+          .poster {
             max-width: 100%;
             border-top-right-radius: 15px;
             border-top-left-radius: 15px;
