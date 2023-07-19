@@ -137,7 +137,7 @@ export default function TVDetail({ params, tv }) {
             <h1>방송사</h1>
             <div className="flex">
               {tv.networks.map((n) => (
-                <div className="networks ">
+                <div key={n.id} className="networks ">
                   <img src={`https://image.tmdb.org/t/p/w500/${n.logo_path}`} />
                 </div>
               ))}
