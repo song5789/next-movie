@@ -39,10 +39,14 @@ export default function MovieDetail({ params, movie, credits, similar, recommend
       director: credits.crew.filter((v) => v.job === "Director"),
       producer: credits.crew.filter((v) => v.job === "Producer"),
     }));
-  }, []);
+    console.log(producer);
+    console.log(director);
+  }, [credits]);
 
   const [title, id] = params;
   const { producer, director } = mainCrew;
+  console.log(producer);
+  console.log(director);
   if (isClient) {
     return (
       <>
