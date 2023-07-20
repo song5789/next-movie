@@ -17,8 +17,8 @@ const BackdropImg = ({ src }) => {
       alt="img"
       priority
       placeholder="blur"
-      blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII="
-      quality={10}
+      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAE0lEQVR42mN0jvbyZEADjDQQBABqFwX7waChTgAAAABJRU5ErkJggg=="
+      quality={75}
     />
   );
 };
