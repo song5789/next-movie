@@ -17,7 +17,10 @@ export default function Episode({ prams, episode }) {
         <SEO title={`${seriesName} : ${seasonName} ${episodeId}화`} />
         <div className="backdrop">
           <BackdropImg src={episode.still_path ? `https://image.tmdb.org/t/p/original/${episode.still_path}` : `/none_3160x2160.svg`} />
-          <div className="episode-name">{episode.name}</div>
+          <div className="episode-name">
+            <span>{seasonName}</span>
+            {` ${episodeId} 화 :  ${episode.name}`}
+          </div>
           <div className="episode-info">
             <div>
               <h1>개요</h1>
@@ -76,9 +79,12 @@ export default function Episode({ prams, episode }) {
             font-size: 3rem;
             font-weight: 700;
             position: absolute;
-            top: 25%;
+            top: 20%;
             left: 2rem;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            text-shadow: 2px 2px 25px #000;
           }
           .crew {
             margin-top: 2rem;

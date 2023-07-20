@@ -8,6 +8,10 @@ const getDailyRanking = async () => {
   return boxOfficeResult;
 };
 
+const delayHandle = (time) => {
+  return `${0.1 * time}s`;
+};
+
 export default function Home({ boxOfficeResult }) {
   const { boxofficeType: type, dailyBoxOfficeList: lists } = boxOfficeResult;
   const today = new Date();
@@ -17,9 +21,9 @@ export default function Home({ boxOfficeResult }) {
       <SEO title={"국내 상영 랭킹"}></SEO>
       <div className="daily">
         <h1>극장 일일 박스오피스 Top 10</h1>
-        {lists.map((v) => (
+        {lists.map((v, index) => (
           <div key={v.movieCd}>
-            <div className="daily-item">
+            <div className="daily-item" style={{ animationDelay: delayHandle(index) }}>
               <div className="rank">
                 {v.rank} <span className={v.rankInten > 0 ? "rank-up" : "rank-down"}>{v.rankInten > 0 ? `↑${v.rankInten}` : `↓${v.rankInten.slice(1)}`}</span>
               </div>
@@ -58,12 +62,10 @@ export default function Home({ boxOfficeResult }) {
             padding: 0.5rem;
             font-weight: 700;
             position: relative;
+            animation: slideUP 0.7s ease-in-out forwards;
+            opacity: 0;
           }
-          .daily-item:hover {
-            transform: scale(1.025);
-            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.9);
-            z-index: 5;
-          }
+
           .old-a-new {
             width: 50px;
             height: 30px;
@@ -97,6 +99,16 @@ export default function Home({ boxOfficeResult }) {
           }
           .rank-down {
             color: blue;
+          }
+          @keyframes slideUP {
+            0% {
+              opacity: 0;
+              transform: translateY(-20%);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
         `}
       </style>

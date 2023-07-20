@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SEO from "../../../components/SEO";
-import ageFunc from "../../../hook/ageFunc";
+import ageFunc, { deathAge } from "../../../hook/ageFunc";
 import SimilarSwiper from "../../../components/SimilarSwiper";
 
 const getAtorsInfo = async (id) => {
@@ -35,7 +35,7 @@ export default function ActorPage({ params, actors, movie_credits, tv_credits })
                     </td>
                     <td className="t-d">
                       <h3>
-                        {actors.birthday} ({ageFunc(actors.birthday)} 세)
+                        {actors.birthday} {actors.deathday ? "" : <span>(만 {ageFunc(actors.birthday)} 세)</span>}
                       </h3>
                     </td>
                   </tr>
@@ -45,7 +45,9 @@ export default function ActorPage({ params, actors, movie_credits, tv_credits })
                         <h3>사망</h3>
                       </td>
                       <td className="t-d">
-                        <h3>{actors.deathday}</h3>
+                        <h3>
+                          {actors.deathday} (향년 만 {deathAge(actors.birthday, actors.deathday)} 세)
+                        </h3>
                       </td>
                     </tr>
                   )}
