@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import PosterImg from "../../components/PosterImg";
 
 const getMovieList = async (page) => {
-  const { results, total_pages, total_results } = await (await fetch(`http://localhost:3000/get/tmdbNowPlaying/${page}`)).json();
+  const { results, total_pages, total_results } = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdbNowPlaying/${page}`)).json();
   return { results, total_pages, total_results };
 };
 

@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import PosterImg from "../../components/PosterImg";
 
 const getTvShowList = async (page) => {
-  const { results, total_pages, total_results } = await (await fetch(`http://localhost:3000/get/tmdb/pop_tv_list/${page}`)).json();
+  const { results, total_pages, total_results } = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdb/pop_tv_list/${page}`)).json();
   return { results, total_pages, total_results };
 };
 

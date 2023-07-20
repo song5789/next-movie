@@ -4,7 +4,7 @@ import ageFunc, { deathAge } from "../../../hook/ageFunc";
 import SimilarSwiper from "../../../components/SimilarSwiper";
 
 const getAtorsInfo = async (id) => {
-  const result = await (await fetch(`http://localhost:3000/get/tmdb/actors/${id}`)).json();
+  const result = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdb/actors/${id}`)).json();
   return result;
 };
 

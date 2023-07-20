@@ -7,7 +7,7 @@ import BackdropImg from "../../../components/BackdropImg";
 import InfoPoster from "../../../components/InfoPoster";
 
 const getTVShowInfo = async (id) => {
-  const result = await (await fetch(`http://localhost:3000/get/tmdb/tv_show/${id}`)).json();
+  const result = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdb/tv_show/${id}`)).json();
   return result;
 };
 

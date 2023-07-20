@@ -4,7 +4,7 @@ import CastSwiper from "../../../components/CastSwiper";
 import BackdropImg from "../../../components/BackdropImg";
 
 const getEpisodeInfo = async (seriesId, seasonId, episodeId) => {
-  const result = await (await fetch(`http://localhost:3000/get/tmdb/tv_show/${seriesId}/seasons/${seasonId}/episodes/${episodeId}`)).json();
+  const result = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdb/tv_show/${seriesId}/seasons/${seasonId}/episodes/${episodeId}`)).json();
   return result;
 };
 

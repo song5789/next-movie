@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import SEO from "../../../components/SEO";
 
 async function getSeasonInfo(seriesid, seasonid) {
-  const result = await (await fetch(`http://localhost:3000/get/tmdb/tv_show/${seriesid}/seasons/${seasonid}`)).json();
+  const result = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdb/tv_show/${seriesid}/seasons/${seasonid}`)).json();
   return result;
 }
 

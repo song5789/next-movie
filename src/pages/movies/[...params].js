@@ -8,20 +8,20 @@ import InfoPoster from "../../../components/InfoPoster";
 import Image from "next/image";
 
 const getMovieInfo = async (id) => {
-  const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/${id}`)).json();
+  const result = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdb/movies/${id}`)).json();
   return result;
 };
 const getMovieCredits = async (id) => {
-  const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/credits/${id}`)).json();
+  const result = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdb/movies/credits/${id}`)).json();
   return result;
 };
 async function getSimilarMovies(id) {
-  const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/similar/${id}`)).json();
+  const result = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdb/movies/similar/${id}`)).json();
   return result;
 }
 
 async function getRecommendations(id) {
-  const result = await (await fetch(`http://localhost:3000/get/tmdb/movies/recommendations/${id}`)).json();
+  const result = await (await fetch(`https://next-movie-ten.vercel.app/get/tmdb/movies/recommendations/${id}`)).json();
   return result;
 }
 
