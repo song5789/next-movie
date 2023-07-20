@@ -1,21 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import dateFunc from "../../hook/dateFunc";
 import SEO from "../../components/SEO";
+import { list } from "postcss";
 
-const getDailyRanking = async () => {
-  const dateQuery = dateFunc();
-  const { boxOfficeResult } = await (await fetch(`https://next-movie-ten.vercel.app/get/todayRk/${dateQuery}`)).json();
-  return boxOfficeResult;
+const getDailyRanking = async (dateQuery) => {
+  const result = await (await fetch(`http://localhost:3000/get/todayRk/${dateQuery}`, { cache: "no-store" })).json();
+  return result;
 };
 
 const delayHandle = (time) => {
   return `${0.1 * time}s`;
 };
 
-export default function Home({ boxOfficeResult }) {
-  const { boxofficeType: type, dailyBoxOfficeList: lists } = boxOfficeResult;
+export default function Home({ result }) {
+  const [lists, setLists] = useState([]);
+  useEffect(() => {
+    setLists(result.boxOfficeResult.dailyBoxOfficeList);
+  }, []);
   const today = new Date();
   const yesterDay = new Date(today.getTime() - 1000 * 3600 * 24);
+  if (Array.isArray(lists) && list.length === 0) return "아직 없음";
   return (
     <div>
       <SEO title={"국내 상영 랭킹"}></SEO>
@@ -117,12 +121,12 @@ export default function Home({ boxOfficeResult }) {
 }
 
 export async function getServerSideProps() {
-  const boxOfficeResult = await getDailyRanking();
-  if (boxOfficeResult) {
-    return {
-      props: {
-        boxOfficeResult,
-      },
-    };
-  }
+  const dateQuery = dateFunc();
+  const result = await getDailyRanking(dateQuery);
+  console.log(result);
+  return {
+    props: {
+      result,
+    },
+  };
 }
