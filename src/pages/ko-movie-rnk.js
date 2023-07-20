@@ -4,7 +4,7 @@ import SEO from "../../components/SEO";
 
 const getDailyRanking = async () => {
   const dateQuery = dateFunc();
-  const { boxOfficeResult } = await (await fetch(`https://next-movie-ten.vercel.app/${dateQuery}`)).json();
+  const { boxOfficeResult } = await (await fetch(`https://next-movie-ten.vercel.app/get/todayRk/${dateQuery}`)).json();
   return boxOfficeResult;
 };
 
