@@ -118,9 +118,11 @@ export default function Home({ boxOfficeResult }) {
 
 export async function getServerSideProps() {
   const boxOfficeResult = await getDailyRanking();
-  return {
-    props: {
-      boxOfficeResult,
-    },
-  };
+  if (boxOfficeResult) {
+    return {
+      props: {
+        boxOfficeResult,
+      },
+    };
+  }
 }
