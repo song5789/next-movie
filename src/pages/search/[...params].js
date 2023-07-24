@@ -138,7 +138,7 @@ export default function SearchPage({ params }) {
             display: flex;
             flex-direction: row;
             font-size: 1.2rem;
-            overflow-x: auto;
+            overflow: scroll;
             justify-content: center;
             align-items: center;
           }
