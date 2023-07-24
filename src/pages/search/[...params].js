@@ -138,10 +138,15 @@ export default function SearchPage({ params }) {
             display: flex;
             flex-direction: row;
             font-size: 1.2rem;
-            overflow: hidden;
+            overflow-x: auto;
             justify-content: center;
             align-items: center;
           }
+
+          .pagination::-webkit-scrollbar {
+            display: none;
+          }
+
           .page-number {
             margin-right: 0.5rem;
             width: 25px;
