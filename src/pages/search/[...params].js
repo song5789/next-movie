@@ -65,7 +65,7 @@ export default function SearchPage({ params }) {
     return (
       <>
         <SEO title={`${title} 검색결과`} />
-        <div style={falieSt}>검색결과가 없습니다</div>
+        <div style={falieSt}>{`${title}`} 의 검색결과가 없습니다</div>
       </>
     );
   return (
