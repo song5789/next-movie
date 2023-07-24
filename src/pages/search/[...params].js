@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import PosterImg from "../../../components/PosterImg";
 
 const getSearchResult = async (type, title, page = 1) => {
-  const result = await (await fetch(`http://localhost:3000/search/db/${type}/${title}/${page}`)).json();
+  const result = await (await fetch(`https://next-movie-ten.vercel.app//search/db/${type}/${title}/${page}`)).json();
   return result;
 };
 
