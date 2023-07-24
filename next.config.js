@@ -54,6 +54,7 @@ const nextConfig = {
         source: "/get/tmdb/tv_show/:id/seasons/:sid/episodes/:eid",
         destination: `https://api.themoviedb.org/3/tv/:id/season/:sid/episode/:eid?api_key=${TMDB_KEY}&language=ko-US`,
       },
+      { source: "/search/db/:type/:title/:page", destination: `https://api.themoviedb.org/3/search/:type?api_key=${TMDB_KEY}&query=:title&language=ko-US&page=:page` },
     ];
   },
 };
